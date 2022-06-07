@@ -42,6 +42,12 @@ The directory to wipe and replace in the target repository.  Defaults to wiping 
 
 The string `ORIGIN_COMMIT` is replaced by `$REPOSITORY_URL@commit`.
 
+### `git-tag-name` (argument) [optional]
+Tag name for the Git Tag to be created. If not specified, Git Tag is not created.
+
+### `git-tag-message` (argument) [optional]
+Commit message for the Git Tag to be created. Defaults to the empty string.
+
 ### `API_TOKEN_GITHUB` (environment)
 E.g.:
   `API_TOKEN_GITHUB: ${{ secrets.API_TOKEN_GITHUB }}`

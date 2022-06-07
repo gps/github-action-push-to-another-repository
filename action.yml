@@ -48,7 +48,14 @@ inputs:
     description: '[Optional] The directory to wipe and replace in the target repository'
     default: ''
     required: false
-        
+  git-tag-name:
+    description: '[Optional] Tag name for the Git Tag to be created. If not specified, Git Tag is not created.'
+    required: false
+  git-tag-message:
+    description: '[Optional] Commit message for the Git Tag to be created.'
+    default: ''
+    required: false
+
 runs:
   using: docker
   image: Dockerfile
@@ -64,6 +71,8 @@ runs:
     - '${{ inputs.target-branch }}'
     - '${{ inputs.commit-message }}'
     - '${{ inputs.target-directory }}'
+    - '${{ inputs.git-tag-name }}'
+    - '${{ inputs.git-tag-message }}'
 branding:
   icon: git-commit
   color: green

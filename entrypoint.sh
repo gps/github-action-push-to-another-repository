@@ -15,6 +15,8 @@ DESTINATION_REPOSITORY_USERNAME="$8"
 TARGET_BRANCH="$9"
 COMMIT_MESSAGE="${10}"
 TARGET_DIRECTORY="${11}"
+GIT_TAG_NAME="${12}"
+GIT_TAG_MESSAGE="${13}"
 
 if [ -z "$DESTINATION_REPOSITORY_USERNAME" ]
 then
@@ -115,6 +117,18 @@ echo "[+] git diff-index:"
 # git diff-index : to avoid doing the git commit failing if there are no changes to be commit
 git diff-index --quiet HEAD || git commit --message "$COMMIT_MESSAGE"
 
+
 echo "Pushing git commit. Create branch if none exists."
 # --set-upstream also creates the branch if it doesn't already exist in the destination repository
 git push "https://$USER_NAME:$API_TOKEN_GITHUB@$GITHUB_SERVER/$DESTINATION_REPOSITORY_USERNAME/$DESTINATION_REPOSITORY_NAME.git" --set-upstream "$TARGET_BRANCH"
+
+# Createing Tag commit if Tag Name is specified
+if [ ! -z "$GIT_TAG_NAME" ]
+then
+	echo "[+] Create tag commit:" $GIT_TAG_NAME
+	git tag -a "$GIT_TAG_NAME" HEAD -m "$GIT_TAG_MESSAGE"
+
+	# Push the tags to origin
+	echo "[+] Pushing git tag."
+	git push "https://$USER_NAME:$API_TOKEN_GITHUB@$GITHUB_SERVER/$DESTINATION_REPOSITORY_USERNAME/$DESTINATION_REPOSITORY_NAME.git" --tags
+fi
