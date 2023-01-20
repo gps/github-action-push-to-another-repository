@@ -69,7 +69,7 @@ Deploy keys are specific to the target repository while API_TOKENs are common fo
 
 If both `SSH_DEPLOY_KEY` and `API_TOKEN_GITHUB` are specified then SSH_DEPLOY_KEY is used.
 
-TODO: Add steps for generating SSH_DEPLOY_KEY for target repo.
+Follow the instructions [here](https://docs.github.com/en/developers/overview/managing-deploy-keys) to create a Deploy key for the target repository.
 
 ### `API_TOKEN_GITHUB` (environment)
 
